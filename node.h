@@ -125,15 +125,15 @@ bool del_node(doubList& list, Node*& node)
 	return true;
 }
 
-//KT ID của sách xem có trùng hay không,không trùng => true,trùng => false
+//KT ID của sách xem đã có tồn tại hay không,nếu có thì => true,không thì false
 bool checkID(doubList list, int id)
 {
 	Node* p = list.first;
 	while (p != NULL && p->info.id != id)
 		p = p->next;
 	if (p == nullptr)
-		return true;
-	return false;
+		return false;
+	return true;
 }
 
 //ghi tất cả thông tin từ dslk sang file
@@ -148,7 +148,7 @@ void writeToFile(doubList list, string url)
 			return;
 		while (p != NULL)
 		{
-			ghiFile(p->info, outF);
+			ghiFileVaoDau(p->info, outF);
 			p = p->next;
 		}
 	}
@@ -192,11 +192,11 @@ void addFileFromTail(doubList& list, string url)
 		do//KT id
 		{
 			nhap1Sach(data);
-			if (!checkID(list, data.id))
+			if (checkID(list, data.id))
 				cout << "ID da ton tai,vui long chon id khac\n";
-		} while (!checkID(list, data.id));
+		} while (checkID(list, data.id));
 		add_Tail(list, data);
-		ghiFile(data, outF);
+		ghiFileVaoCuoi(data, outF);
 	}
 	else
 	{

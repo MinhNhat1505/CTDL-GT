@@ -45,8 +45,18 @@ void docFile(Book& book,ifstream& fileIn)
 	fileIn >> book.nam;
 }
 
-//ghi 1 file
-void ghiFile(Book book, ofstream& fileOut)
+//hàm ghi thông tin vào cuối file
+void ghiFileVaoCuoi(Book book, ofstream& fileOut)
+{
+	fileOut << endl << book.id << "#"
+		<< book.ten << "#"
+		<< book.tacGia << "#"
+		<< book.NXB << "#"
+		<< book.nam;
+}
+
+//Hàm ghi thông tin vào đầu file
+void ghiFileVaoDau(Book book, ofstream& fileOut)
 {
 	fileOut << book.id << "#"
 		<< book.ten << "#"

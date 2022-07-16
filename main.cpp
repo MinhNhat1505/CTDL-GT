@@ -45,6 +45,22 @@ int main()
 			} while (x != 0);
 			break;
 		case 6:
+			if (isEmpty(list1))
+				cout << "Khong co data de xu li!\n";
+			else
+			{
+				int id;
+				do
+				{
+					cout << "Nhap id sach ban muon xoa: ";
+					cin >> id;
+					if (!checkID(list1, id))
+						cout << "ID ban nhap khong ton tai,vui long nhap lai!\n";
+				} while (!checkID(list1,id));
+				del_book_by_ID(list1, id);
+				updateFile(list1, "DS_sach.txt");
+				cout << "Xoa thanh cong\n";
+			}
 			break;
 		case 7:
 			break;

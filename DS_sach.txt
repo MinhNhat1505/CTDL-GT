@@ -1,0 +1,10 @@
+2101#Ngu Van#Nguyen Phan A#Truong Phan A#2003
+2102#Toan#Nguyen Phan B#Truong Phan B#2002
+2103#Dia ly#Nguyen Phan C#Truong Phan C#2001
+2104#Lich Su#Nguyen Phan D#Truong Phan D#2003
+2105#Tin Hoc#Nguyen Phan E#Truong Phan E#2004
+2106#Giao Duc Cong Dan#Nguyen Phan F#Truong Phan F#2001
+2107#Sinh hoc#Nguyen Phan G#Truong Phan G#2000
+2108#Tieng Anh#Nguyen Phan H#Truong Phan H#2001
+2109#Nhac#Nguyen Phan I#Truong Phan I#2004
+2110#My thuat#Nguyen Phan J#Truong Phan J#2000

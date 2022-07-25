@@ -54,13 +54,3 @@ void ghiFileVaoCuoi(Book book, ofstream& fileOut)
 		<< book.NXB << "#"
 		<< book.nam;
 }
-
-//Hàm ghi thông tin vào đầu file
-void ghiFileVaoDau(Book book, ofstream& fileOut)
-{
-	fileOut << book.id << "#"
-		<< book.ten << "#"
-		<< book.tacGia << "#"
-		<< book.NXB << "#"
-		<< book.nam << endl;
-}

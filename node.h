@@ -125,6 +125,10 @@ bool del_node(doubList& list, Node*& node)
 	return true;
 }
 
+//bool delEmptyLine(string url)
+//{
+//}
+
 //KT ID của sách xem đã có tồn tại hay không,nếu có thì => true,không thì false
 bool checkID(doubList list, int id)
 {
@@ -134,6 +138,12 @@ bool checkID(doubList list, int id)
 	if (p == nullptr)
 		return false;
 	return true;
+}
+
+bool file_empty(string url)
+{
+	ifstream pFile;
+	return pFile.peek() == ifstream::traits_type::eof();
 }
 
 //ghi tất cả thông tin từ dslk sang file
@@ -146,9 +156,20 @@ void writeToFile(doubList list, string url)
 		Node* p = list.first;
 		if (p == NULL)//nếu dslk rỗng thì thoát
 			return;
+		bool first = file_empty(url);
 		while (p != NULL)
 		{
-			ghiFileVaoDau(p->info, outF);
+			if (first)
+			{
+				outF << p->info.id << "#"
+					<< p->info.ten << "#"
+					<< p->info.tacGia << "#"
+					<< p->info.NXB << "#"
+					<< p->info.nam;
+				first = false;
+			}
+			else
+				ghiFileVaoCuoi(p->info, outF);
 			p = p->next;
 		}
 	}
@@ -227,6 +248,25 @@ bool del_book_by_ID(doubList& list, int data)
 	if (p == NULL)//chạy hết ds mà không thấy node
 		return false;
 	del_node(list, p);
+	return true;
+}
+
+bool del_book_by_auth(doubList& list, string author)
+{
+	Node* p = list.first;
+	if (p == NULL)
+		return false;
+	while (p != NULL)
+	{
+		if (p->info.tacGia == author)
+		{
+			Node* t = p;
+			p = p->pre;
+			del_node(list, t);
+			continue;
+		}
+		p = p->next;
+	}
 	return true;
 }
 

@@ -8,6 +8,7 @@ void menu();
 int main()
 {
 	int chon;
+	string a = "Nguyen Phan B";
 	doubList list1;
 	
 	init(list1);
@@ -40,7 +41,7 @@ int main()
 			do
 			{
 				addFileFromTail(list1, "DS_sach.txt");
-				cout << "Ban co muon tiep tuc?(bam 0 de thoat): ";
+				cout << "Ban co muon thoat?(bam 0 de thoat): ";
 				cin >> x;
 			} while (x != 0);
 			break;
@@ -63,6 +64,9 @@ int main()
 			}
 			break;
 		case 7:
+			del_book_by_auth(list1, a);
+			updateFile(list1, "DS_sach.txt");
+			process_list(list1);
 			break;
 		case 8:
 			break;

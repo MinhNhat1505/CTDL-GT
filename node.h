@@ -140,10 +140,11 @@ bool checkID(doubList list, int id)
 	return true;
 }
 
+//Hàm kt file có rỗng hay không ? có => true,không => false
 bool file_empty(string url)
 {
-	ifstream pFile;
-	return pFile.peek() == ifstream::traits_type::eof();
+	ifstream pFile(url);
+	return pFile.peek() == EOF;
 }
 
 //ghi tất cả thông tin từ dslk sang file

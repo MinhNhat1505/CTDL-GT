@@ -1,15 +1,20 @@
 #include<iostream>
 #include<conio.h>
 #include "node.h"
+#include<vector>
 using namespace std;
 
 void menu();
+bool getPublisher(doubList list,vector<string>&publisher, vector<int>&number);
+bool sort_num_of_Publisher(vector<string>& publisher, vector<int>& number);
 
 int main()
 {
 	int chon;
 	string a = "Nguyen Phan B";
 	doubList list1;
+	vector<string>publisher;
+	vector<int>number;
 	
 	init(list1);
 	do
@@ -73,6 +78,13 @@ int main()
 		case 9:
 			break;
 		case 10:
+			getPublisher(list1, publisher, number);
+			sort_num_of_Publisher(publisher, number);
+			for (int i = 0; i < publisher.size(); i++)
+			{
+				cout << "Tac gia: " << publisher[i] << endl
+					<< "so luong:" << number[i] << endl;
+			}
 			break;
 		default:
 			cout << "Ban chon thoat!\n";
@@ -97,4 +109,62 @@ void menu()
 		<< "**     10.In danh sach thong ke so luong sach theo NXB **\n"
 		<< "**     11.Thoat                                        **\n"
 		<< "*********************************************************\n";
+}
+
+bool getPublisher(doubList list,vector<string>& publisher, vector<int>& number)
+{
+	Node* p = list.first;
+	if (p == NULL)
+		return false;
+	while (p != NULL)
+	{
+		if (publisher.empty())
+		{
+			publisher.push_back(p->info.NXB);
+			number.push_back(1);
+		}
+		else
+		{
+			bool input = false;
+			for (int i = 0; i < publisher.size(); i++)
+			{
+				if (publisher[i] == p->info.NXB)
+				{
+					number[i] += 1;
+					input = true;
+					break;
+				}
+			}
+			if (!input)
+			{
+				publisher.push_back(p->info.NXB);
+				number.push_back(1);
+			}
+		}
+		p = p->next;
+	}
+	return true;
+}
+
+bool sort_num_of_Publisher(vector<string>& publisher, vector<int>& number)
+{
+	if (number.empty())
+		return false;
+	if (number.size() == 1)
+		return true;
+	for (int i = 0; i < number.size() - 1; i++)
+		for(int j = i + 1;j < number.size();j++)
+			if (number[j] > number[i])
+			{
+				//doi vi tri number
+				int t = number[i];
+				number[i] = number[j];
+				number[j] = t;
+
+				//doi vi tri publisher
+				string temp = publisher[i];
+				publisher[i] = publisher[j];
+				publisher[j] = temp;
+			}
+	return true;
 }

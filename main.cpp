@@ -6,7 +6,7 @@ using namespace std;
 
 void menu();
 void add_Publisher_to_vector(string name, vector<string>& publisher, vector<int>& number);
-bool getPublisher(doubList list,vector<string>&publisher, vector<int>&number);
+bool getPublisher(doubList list, vector<string>& publisher, vector<int>& number);
 bool sort_num_of_Publisher(vector<string>& publisher, vector<int>& number);
 void print_Publisher_list(vector<string>& publisher, vector<int>& number);
 
@@ -14,7 +14,6 @@ int main()
 {
 	int chon;
 	bool openFile = false, get_Publisher = false;
-	string a = "Nguyen Phan B";
 
 	/*
 	list1:list chính
@@ -22,14 +21,14 @@ int main()
 	list3:list chứa sách đc xếp theo năm giảm dần(mục 9)
 	publisher - number: mảng chứa tên nhà xuất bản / chứa số lượng cuốn sách mà của NXB đó (dùng cho mục 10)
 	*/
-	doubList list1, list2,list3;
+	doubList list1, list2, list3;
 	vector<string>publisher;
 	vector<int>number;
 
 	bool needUPdList2 = false,
 		needUpdList3 = false,
 		needUpPublisher = false;
-	
+
 	init(list1);
 	init(list2);
 	init(list3);
@@ -59,7 +58,30 @@ int main()
 		case 2:
 			if (openFile)
 			{
-				
+				int choice;
+				system("cls");
+				do
+				{
+					cout << "Ban muon tim sach theo id hay theo ten?\n"
+						<< "Ban chon(1:id/2:sach): ";
+					cin >> choice;
+				} while (choice != 1 && choice != 2);
+
+				if (choice == 1)
+				{
+					int id;
+					cout << "Nhap id can tim: ";
+					cin >> id;
+					Find_Book_by_id(list1, id);
+				}
+				else
+				{
+					string n;
+					cout << "Nhap ten sach: ";
+					cin.ignore();
+					getline(cin, n);
+					Find_Book_by_name(list1, n);
+				}
 			}
 			else
 				cout << "Vui long nhap du lieu tu file!\n";
@@ -67,7 +89,11 @@ int main()
 		case 3:
 			if (openFile)
 			{
-
+				string n;
+				cout << "Nhap ten tac gia ban muon tim: ";
+				cin.ignore();
+				getline(cin, n);
+				print_author(list1, n);
 			}
 			else
 				cout << "Vui long nhap du lieu tu file!\n";
@@ -75,7 +101,11 @@ int main()
 		case 4:
 			if (openFile)
 			{
-
+				string n;
+				cout << "Nhap nha xuat ban ma ban muon tim: ";
+				cin.ignore();
+				getline(cin, n);
+				print_publisher(list1, n);
 			}
 			else
 				cout << "Vui long nhap du lieu tu file!\n";
@@ -114,10 +144,16 @@ int main()
 					{
 						cout << "Nhap id sach ban muon xoa: ";
 						cin >> id;
-						if (!del_book_by_ID(list1,id))
+						bool check = del_book_by_ID(list1, id);
+						if (!check)
+						{
 							cout << "ID ban nhap khong ton tai,vui long nhap lai!\n";
-					} while (!del_book_by_ID(list1, id));
-
+						}
+						else
+							break;
+					} while (true);
+					cout << "Xoa thanh cong\n";
+					updateFile(list1, "DS_sach.txt");
 					//nếu như chọn mục 8/9/10 mà quay lại mục 6 thì update list của mục 8/9/10
 					if (!isEmpty(list2))
 						needUPdList2 = true;
@@ -272,7 +308,7 @@ void add_Publisher_to_vector(string name, vector<string>& publisher, vector<int>
 }
 
 //lấy toàn bộ thông tin của NXB từ dslk
-bool getPublisher(doubList list,vector<string>& publisher, vector<int>& number)
+bool getPublisher(doubList list, vector<string>& publisher, vector<int>& number)
 {
 	Node* p = list.first;
 	if (p == NULL)
@@ -293,11 +329,11 @@ bool sort_num_of_Publisher(vector<string>& publisher, vector<int>& number)
 	if (number.size() == 1)
 		return true;
 	for (int i = 0; i < number.size() - 1; i++)
-		for(int j = i + 1;j < number.size();j++)
+		for (int j = i + 1; j < number.size(); j++)
 			if (number[j] > number[i])
 			{
 				//doi vi tri number
-				swap_int(number[i], number[j]); 
+				swap_int(number[i], number[j]);
 
 				//doi vi tri publisher
 				swap_string(publisher[i], publisher[j]);
@@ -310,7 +346,7 @@ void print_Publisher_list(vector<string>& publisher, vector<int>& number)
 	cout << "=========================\n";
 	for (int i = 0; i < publisher.size(); i++)
 	{
-		cout << "Tac gia: " << publisher[i] << endl
+		cout << "Nha xuat ban: " << publisher[i] << endl
 			<< "so luong:" << number[i] << endl;
 		cout << "=========================\n";
 	}

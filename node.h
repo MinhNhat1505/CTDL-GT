@@ -50,7 +50,7 @@ void swap_int(int& a, int& b)
 }
 
 //thêm thông tin vào đầu ds
-void add_Head(doubList& list,Book data)
+void add_Head(doubList& list, Book data)
 {
 	Node* p = createNode(data);//tạo 1 node mới với data 
 
@@ -67,7 +67,7 @@ void add_Head(doubList& list,Book data)
 }
 
 //thêm thông tin vào cuối ds
-void add_Tail(doubList& list,Book data)
+void add_Tail(doubList& list, Book data)
 {
 	Node* p = createNode(data);//tạo 1 node với data
 
@@ -217,7 +217,7 @@ void writeToFile(doubList list, string url)
 }
 
 //gán toàn bộ thông tin trong file vào dslk
-void readFile(doubList& list,string url)
+void readFile(doubList& list, string url)
 {
 	ifstream inF;//khởi tạo file muốn đọc
 	inF.open(url);//mở file
@@ -228,7 +228,7 @@ void readFile(doubList& list,string url)
 		{
 			Book data;//khởi tạo data
 
-			docFile(data,inF);//cập nhập data
+			docFile(data, inF);//cập nhập data
 			add_Tail(list, data);
 		}
 	}
@@ -243,11 +243,11 @@ void readFile(doubList& list,string url)
 void addFileFromTail(doubList& list, string url)
 {
 	ofstream outF;
-	outF.open(url,ios::app);
+	outF.open(url, ios::app);
 	if (outF.is_open())
 	{
 		Book data;
-		
+
 		do//KT id
 		{
 			nhap1Sach(data);
@@ -308,7 +308,7 @@ bool del_book_by_author(doubList& list, string author)
 		}
 		p = p->next;
 	}
-	if(check != -1)
+	if (check != -1)
 		return true;
 	return false;
 }
@@ -356,12 +356,126 @@ void updateFile(doubList list, string url)
 	writeToFile(list, url);
 }
 
+//xuất sách theo id
+void Find_Book_by_id(doubList list, int id)
+{
+	Node* p = list.first;
+
+	if (p == NULL)
+	{
+		cout << "Khong co du lieu!" << endl;
+		return;
+	}
+	else
+	{
+		while (p != NULL && p->info.id != id)
+			p = p->next;
+		if (p == NULL)
+			cout << "ID khong ton tai\n";
+		else
+		{
+			cout << "danh sach da tim kiem la:\n";
+			xuat1sach(p->info);
+		}
+	}
+}
+
+//xuất sách theo tên
+void Find_Book_by_name(doubList list, string x)
+{
+	Node* p = list.first;
+
+	if (p == NULL)
+	{
+		cout << "Khong co du lieu!" << endl;
+		return;
+	}
+	else
+	{
+		int dem = 0;
+		while (p != NULL)
+		{
+			if (p->info.ten == x)
+			{
+				if (dem == 0)
+				{
+					cout << "Danh sach da tim kiem la:\n";
+				}
+				dem++;
+				xuat1sach(p->info);
+				cout << "=====================================\n";
+			}
+			p = p->next;
+		}
+		if (dem == 0)
+			cout << "Ten ban nhap khong co trong du lieu\n";
+	}
+}
+
+//in danh mục sách theo tên tác giả
+void print_author(doubList list, string author)
+{
+	Node* p = list.first;
+	if (p == NULL)
+	{
+		cout << "Khong co du lieu!" << endl;
+		return;
+	}
+	else
+	{
+		int dem = 0;
+		while (p != NULL)
+		{
+			if (p->info.tacGia == author)
+			{
+				if(dem == 0)
+					cout << "Danh muc sach theo tac gia: \n";
+				xuat1sach(p->info);
+				cout << "=====================================\n";
+				dem++;
+			}
+			p = p->next;
+		}
+		if (dem == 0)
+			cout << "Tac gia khong ton tai\n";
+	}
+}
+
+//in danh mục sách theo năm xuất bản
+void print_publisher(doubList list, string x)
+{
+	Node* p = list.first;
+	if (p == NULL)
+	{
+		cout << "Khong co du lieu!" << endl;
+		return;
+	}
+	else
+	{
+		int dem = 0;
+		while (p != NULL)
+		{
+			if (p->info.NXB == x)
+			{
+				if (dem == 0)
+					cout << "Danh muc sach theo nha xuat ban: \n";
+				xuat1sach(p->info);
+				cout << "=====================================\n";
+				dem++;
+			}
+			p = p->next;
+		}
+		if (dem == 0)
+			cout << "Nha xuat ban khong tim thay\n";
+	}
+}
+
 //xuất thông tin sách theo thứ tự từ đầu đến cuối
 void process_list(doubList list)
 {
 	Node* p = list.first;
 	int dem = 1;
-	
+
 	if (p == NULL)
 	{
 		cout << "Khong co du lieu!" << endl;

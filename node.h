@@ -28,12 +28,25 @@ Node* createNode(Book data)
 	return p;
 }
 
-//hàm kt rỗng
 bool isEmpty(doubList& list)
 {
 	if (list.first == NULL)
 		return true;
 	return false;
+}
+
+void swap_string(string& a, string& b)
+{
+	string temp = a;
+	a = b;
+	b = temp;
+}
+
+void swap_int(int& a, int& b)
+{
+	int temp = a;
+	a = b;
+	b = temp;
 }
 
 //thêm thông tin vào đầu ds
@@ -125,9 +138,20 @@ bool del_node(doubList& list, Node*& node)
 	return true;
 }
 
-//bool delEmptyLine(string url)
-//{
-//}
+//xóa toàn bộ thông tin của 1 dslk
+bool del_list(doubList& list)
+{
+	if (list.first == NULL)
+		return true;
+	if (list.first == list.last)
+	{
+		del_first(list);
+		return true;
+	}
+	while (!isEmpty(list))
+		del_first(list);
+	return true;
+}
 
 //KT ID của sách xem đã có tồn tại hay không,nếu có thì => true,không thì false
 bool checkID(doubList list, int id)
@@ -138,6 +162,19 @@ bool checkID(doubList list, int id)
 	if (p == nullptr)
 		return false;
 	return true;
+}
+
+//sao chép toàn bộ thông tin từ list1 sang list 2
+void copyList(doubList list1, doubList& list2)
+{
+	if (list1.first == NULL)
+		return;
+	Node* p = list1.first;
+	while (p != NULL)
+	{
+		add_Tail(list2, p->info);
+		p = p->next;
+	}
 }
 
 //Hàm kt file có rỗng hay không ? có => true,không => false
@@ -252,23 +289,64 @@ bool del_book_by_ID(doubList& list, int data)
 	return true;
 }
 
-bool del_book_by_auth(doubList& list, string author)
+//xóa toàn bộ sách theo tên tác giả
+bool del_book_by_author(doubList& list, string author)
 {
 	Node* p = list.first;
 	if (p == NULL)
 		return false;
+	int check = -1;
 	while (p != NULL)
 	{
 		if (p->info.tacGia == author)
 		{
 			Node* t = p;
-			p = p->pre;
+			p = p->next;
 			del_node(list, t);
+			check++;
 			continue;
 		}
 		p = p->next;
 	}
-	return true;
+	if(check != -1)
+		return true;
+	return false;
+}
+
+//sắp xếp dslk theo tên tăng dần
+void sortList_Book(doubList& list)
+{
+	Node* p, * q;
+	p = list.first;
+	while (p != list.last)
+	{
+		q = p->next;
+		while (q != NULL)
+		{
+			if (p->info.ten > q->info.ten)
+				swap_string(q->info.ten, p->info.ten);
+			q = q->next;
+		}
+		p = p->next;
+	}
+}
+
+//sắp xếp dslk theo năm giảm dần
+void sortList_year(doubList& list)
+{
+	Node* p, * q;
+	p = list.first;
+	while (p != list.last)
+	{
+		q = p->next;
+		while (q != NULL)
+		{
+			if (p->info.nam > q->info.nam)
+				swap_int(q->info.nam, p->info.nam);
+			q = q->next;
+		}
+		p = p->next;
+	}
 }
 
 //sao chép hoặc update thông tin từ dslk đơn qua file

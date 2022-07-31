@@ -114,9 +114,9 @@ int main()
 					{
 						cout << "Nhap id sach ban muon xoa: ";
 						cin >> id;
-						if (!checkID(list1, id))
+						if (!del_book_by_ID(list1,id))
 							cout << "ID ban nhap khong ton tai,vui long nhap lai!\n";
-					} while (!checkID(list1, id));
+					} while (!del_book_by_ID(list1, id));
 
 					//nếu như chọn mục 8/9/10 mà quay lại mục 6 thì update list của mục 8/9/10
 					if (!isEmpty(list2))

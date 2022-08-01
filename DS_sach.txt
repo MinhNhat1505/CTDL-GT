@@ -10,5 +10,5 @@
 5877#Hoc lam nguoi#Truong Phan Thien Bao#Nha sach Binh Tan#2022
 1499#Ung dung web#To Oai Hung#Dai hoc Mo TPHCM#2021
 5531#Lap Trinh PyThon#Dung lai lap trinh#Nha sach Binh Tan#2018
-4588#He Dieu Hanh#To Oai Hung#Dai Hoc Mo TPHCM#2022
+4588#He Dieu Hanh#To Oai Hung#Dai hoc Mo TPHCM#2022
 1444#Dac Nhan Tam#Dale Carnegie#Nha Sach Go Vap#1936

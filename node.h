@@ -49,6 +49,13 @@ void swap_int(int& a, int& b)
 	b = temp;
 }
 
+void swap_book(Book& a, Book& b)
+{
+	Book t = a;
+	a = b;
+	b = t;
+}
+
 //thêm thông tin vào đầu ds
 void add_Head(doubList& list, Book data)
 {
@@ -324,7 +331,7 @@ void sortList_Book(doubList& list)
 		while (q != NULL)
 		{
 			if (p->info.ten > q->info.ten)
-				swap_string(q->info.ten, p->info.ten);
+				swap_book(p->info, q->info);
 			q = q->next;
 		}
 		p = p->next;
@@ -342,7 +349,7 @@ void sortList_year(doubList& list)
 		while (q != NULL)
 		{
 			if (p->info.nam > q->info.nam)
-				swap_int(q->info.nam, p->info.nam);
+				swap_book(p->info, q->info);
 			q = q->next;
 		}
 		p = p->next;

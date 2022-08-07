@@ -13,7 +13,7 @@ void print_Publisher_list(vector<string>& publisher, vector<int>& number);
 int main()
 {
 	int chon;
-	bool openFile = false, get_Publisher = false;
+	bool openFile = false;
 
 	/*
 	list1:list chính
@@ -26,8 +26,8 @@ int main()
 	vector<int>number;
 
 	bool needUPdList2 = false,
-		needUpdList3 = false,
-		needUpPublisher = false;
+	needUpdList3 = false,
+	needUpPublisher = false;
 
 	init(list1);
 	init(list2);
@@ -93,6 +93,8 @@ int main()
 				cout << "Nhap ten tac gia ban muon tim: ";
 				cin.ignore();
 				getline(cin, n);
+				xoaKhoangTrang(n);
+				ChuanHoaChuoi(n);
 				print_author(list1, n);
 			}
 			else
@@ -105,6 +107,8 @@ int main()
 				cout << "Nhap nha xuat ban ma ban muon tim: ";
 				cin.ignore();
 				getline(cin, n);
+				xoaKhoangTrang(n);
+				ChuanHoaChuoi(n);
 				print_publisher(list1, n);
 			}
 			else
@@ -173,6 +177,8 @@ int main()
 				cout << "Nhap ten tac gia: ";
 				cin.ignore();
 				getline(cin, ten);
+				xoaKhoangTrang(ten);
+				ChuanHoaChuoi(ten);
 				if (del_book_by_author(list1, ten))
 				{
 					updateFile(list1, "DS_sach.txt");

@@ -391,7 +391,6 @@ void Find_Book_by_id(doubList list, int id)
 void Find_Book_by_name(doubList list, string x)
 {
 	Node* p = list.first;
-
 	if (p == NULL)
 	{
 		cout << "Khong co du lieu!" << endl;
@@ -400,6 +399,9 @@ void Find_Book_by_name(doubList list, string x)
 	else
 	{
 		int dem = 0;
+		//chuẩn hóa chuỗi tìm kiếm để giống với chuỗi trong file
+		xoaKhoangTrang(x);
+		ChuanHoaChuoi(x);
 		while (p != NULL)
 		{
 			if (p->info.ten == x)
